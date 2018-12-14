@@ -14,14 +14,14 @@
     var app = {};
     option = null;
     myChart.showLoading();
-    $.get('data/G_v2.gexf', function (xml) {
+    $.get('data/hr_d1g.gexf', function (xml) {
         myChart.hideLoading();
 
         var graph = echarts.dataTool.gexf.parse(xml);
         var categories = [];
-        for (var i = 0; i < 9; i++) {
+        for (var i = 0; i < 23; i++) {
             categories[i] = {
-                name: '系列' + i
+                name: '簇' + i
             };
         }
         graph.nodes.forEach(function (node) {
@@ -36,7 +36,7 @@
         });
         option = {
             title: {
-                text: 'Les Miserables',
+                text: 'email day1, Human resource department',
                 subtext: 'Default layout',
                 top: 'bottom',
                 left: 'right'
@@ -52,7 +52,7 @@
             animationEasingUpdate: 'quinticInOut',
             series : [
                 {
-                    name: 'Les Miserables',
+                    name: 'email',
                     type: 'graph',
                     layout: 'none',
                     data: graph.nodes,
