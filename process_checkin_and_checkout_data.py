@@ -5,6 +5,8 @@ import numpy as np
 from dateutil import parser
 import traceback
 
+__author__ = "Ye"
+
 if len(sys.argv) < 2:
     print("Please enter the data path as the first argument")
     exit()
@@ -14,13 +16,15 @@ data_path = sys.argv[1]
 checkin_day_hour_counts = []
 checkout_day_hour_counts = []
 
-dates = list(filter(lambda filename: os.path.isdir(os.path.join(data_path, filename)), os.listdir(data_path)))
+dates = list(filter(lambda filename: os.path.isdir(
+    os.path.join(data_path, filename)), os.listdir(data_path)))
 print(f"Dates: {dates}")
 with open("data/dates.txt", "w") as f:
     f.write(str(dates))
 for date in dates:
     try:
-        df = pd.read_csv(os.path.join(data_path, date, "checking.csv"), engine="python")
+        df = pd.read_csv(os.path.join(
+            data_path, date, "checking.csv"), engine="python")
         checkin_hour_counts = np.zeros(24, dtype=int)
         checkout_hour_counts = np.zeros(24, dtype=int)
         for index, row in df.iterrows():
@@ -38,7 +42,8 @@ for date in dates:
     except FileNotFoundError:
         pass
     except Exception as e:
-        print(f"An unknown exception occurred when processing {date}. Skipped.")
+        print(
+            f"An unknown exception occurred when processing {date}. Skipped.")
         traceback.print_exc()
 
 # print(checkin_day_hour_counts)
